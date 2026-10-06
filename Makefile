@@ -1,0 +1,61 @@
+ifeq ($(origin CXX), default)
+	CXX = g++
+endif
+
+CXXFLAGS ?= -g -O2 -Wall -Wextra -std=c++17
+UNAME_S := $(shell uname -s)
+ifeq ($(UNAME_S),Darwin)
+    LDFLAGS ?= -framework OpenGL -framework GLUT
+else
+    LDFLAGS ?= -lGL -lGLU -lglut
+endif
+OUT_O_DIR ?= build
+COMMONINC = -I./include
+SRC = src
+ROOT_DIR:=$(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
+
+override CXXFLAGS += $(COMMONINC)
+
+# Добавлены новые файлы intersection.cpp и render.cpp
+CXXSRC = src/main.cpp src/geometry.cpp src/intersection.cpp src/render.cpp
+
+CXXOBJ := $(addprefix $(OUT_O_DIR)/,$(CXXSRC:.cpp=.o))
+DEPS = $(CXXOBJ:.o=.d)
+
+.PHONY: all
+all: $(OUT_O_DIR)/out
+
+$(OUT_O_DIR)/out : $(CXXOBJ)
+	$(CXX) $^ -o $@ $(LDFLAGS)
+
+$(CXXOBJ) : $(OUT_O_DIR)/%.o : %.cpp
+	@mkdir -p $(@D)
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+$(DEPS) : $(OUT_O_DIR)/%.d : %.cpp
+	@mkdir -p $(@D)
+	$(CXX) -E $(CXXFLAGS) $< -MM -MT $(@:.d=.o) > $@
+
+-include $(DEPS)
+
+#Tests
+TEST_DIR = tests
+TEST_BIN = build/triangles_tests
+
+TEST_SRC = $(wildcard $(TEST_DIR)/*_tests.cpp) src/geometry.cpp
+GTEST_LIBS = -lgtest -lgtest_main -pthread
+
+.PHONY: test test-filter
+
+test: $(TEST_BIN)
+	./$(TEST_BIN)
+
+test-filter: $(TEST_BIN)
+	./$(TEST_BIN) --gtest_filter="$(FILTER)"
+
+$(TEST_BIN): $(TEST_SRC)
+	$(CXX) $(CXXFLAGS) $(COMMONINC) $(TEST_SRC) $(GTEST_LIBS) -o $@
+
+.PHONY: clean
+clean:
+	rm -rf $(OUT_O_DIR)
