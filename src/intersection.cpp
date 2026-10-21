@@ -1,8 +1,9 @@
-#include "intersection.hpp"
 #include <cmath>
+#include <vector>
 #include <algorithm>
+#include "..//include/intersection.hpp"
 
-const double EPS = 1e-6;
+constexpr double EPS = 1e-6;
 
 bool are_coplanar(const Triangle3& t1, const Triangle3& t2) {
     Vector3 n1 = t1.normal();
@@ -15,23 +16,23 @@ bool are_coplanar(const Triangle3& t1, const Triangle3& t2) {
 struct Point2D { double x, y; };
 
 /**
- * @brief Computes the 2D cross product (oriented area) of three points[cite: 185].
- * @param a First point[cite: 185].
- * @param b Second point[cite: 185].
- * @param c Third point[cite: 185].
- * @return Double value representing the oriented side[cite: 185].
+ * @brief Computes the 2D cross product (oriented area) of three points.
+ * @param a First point.
+ * @param b Second point.
+ * @param c Third point.
+ * @return Double value representing the oriented side.
  */
 double cross2d(Point2D a, Point2D b, Point2D c) {
     return (b.x - a.x) * (c.y - a.y) - (b.y - a.y) * (c.x - a.x);
 }
 
 /**
- * @brief Finds the intersection point of two 2D lines using Cramer's rule[cite: 185].
- * @param a Start point of the first line[cite: 185].
- * @param b End point of the first line[cite: 185].
- * @param p Start point of the second line[cite: 185].
- * @param q End point of the second line[cite: 185].
- * @return Intersection Point2D[cite: 185].
+ * @brief Finds the intersection point of two 2D lines using Cramer's rule.
+ * @param a Start point of the first line.
+ * @param b End point of the first line.
+ * @param p Start point of the second line.
+ * @param q End point of the second line.
+ * @return Intersection Point2D.
  */
 Point2D intersect_lines2d(Point2D a, Point2D b, Point2D p, Point2D q) {
     double A1 = b.y - a.y, B1 = a.x - b.x, C1 = A1 * a.x + B1 * a.y;
@@ -98,4 +99,106 @@ Polygon3 intersect_coplanar_triangles(const Triangle3& t1, const Triangle3& t2) 
     std::vector<Point3> res3d;
     for (auto& p2 : clipped) res3d.push_back(to3d(p2, t1.a));
     return Polygon3(res3d);
+}
+
+/**
+ * @brief Checks if a 3D point is inside a triangle.
+ */
+bool point_in_triangle(const Point3& p, const Triangle3& t) {
+    Vector3 v0 = t.b - t.a;
+    Vector3 v1 = t.c - t.a;
+    Vector3 v2 = p - t.a;
+    double d00 = v0.dot(v0);
+    double d01 = v0.dot(v1);
+    double d11 = v1.dot(v1);
+    double d20 = v2.dot(v0);
+    double d21 = v2.dot(v1);
+    double denom = d00 * d11 - d01 * d01;
+    if (std::abs(denom) < 1e-9) return false;
+    double v = (d11 * d20 - d01 * d21) / denom;
+    double w = (d00 * d21 - d01 * d20) / denom;
+    double u = 1.0 - v - w;
+    const double eps = -1e-5;
+    return (u >= eps) && (v >= eps) && (w >= eps) && (u <= 1.0 - eps) && (v <= 1.0 - eps) && (w <= 1.0 - eps);
+}
+
+/**
+ * @brief Intersects a 3D segment with a triangle's plane.
+ */
+bool intersect_segment_plane(const Point3& a, const Point3& b, const Triangle3& t, Point3& out_pt) {
+    Vector3 n = t.normal();
+    // Превращаем Point3 в Vector3 через вычитание с началом координат или через векторные компоненты
+    Vector3 ta_vec(t.a.x, t.a.y, t.a.z);
+    Vector3 a_vec(a.x, a.y, a.z);
+    Vector3 b_vec(b.x, b.y, b.z);
+
+    double d = -n.dot(ta_vec);
+    double na = n.dot(a_vec) + d;
+    double nb = n.dot(b_vec) + d;
+    if (na * nb > 0) return false;
+    if (std::abs(na - nb) < 1e-9) return false;
+    double t_val = na / (na - nb);
+    if (t_val < 0.0 || t_val > 1.0) return false;
+    out_pt = Point3(a.x + t_val * (b.x - a.x), a.y + t_val * (b.y - a.y), a.z + t_val * (b.z - a.z));
+    return true;
+}
+
+Segment3 intersect_non_coplanar_triangles(const Triangle3& t1, const Triangle3& t2) {
+    if (are_coplanar(t1, t2)) return Segment3();
+
+    std::vector<Point3> pts;
+
+    Point3 edges1[3][2] = {{t1.a, t1.b}, {t1.b, t1.c}, {t1.c, t1.a}};
+    for (int i = 0; i < 3; ++i) {
+        Point3 pt;
+        if (intersect_segment_plane(edges1[i][0], edges1[i][1], t2, pt)) {
+            if (point_in_triangle(pt, t2)) {
+                pts.push_back(pt);
+            }
+        }
+    }
+
+    Point3 edges2[3][2] = {{t2.a, t2.b}, {t2.b, t2.c}, {t2.c, t2.a}};
+    for (int i = 0; i < 3; ++i) {
+        Point3 pt;
+        if (intersect_segment_plane(edges2[i][0], edges2[i][1], t1, pt)) {
+            if (point_in_triangle(pt, t1)) {
+                pts.push_back(pt);
+            }
+        }
+    }
+
+    std::vector<Point3> unique_pts;
+    for (const auto& p : pts) {
+        bool duplicate = false;
+        for (const auto& up : unique_pts) {
+            if ((p - up).length() < 1e-4) {
+                duplicate = true;
+                break;
+            }
+        }
+        if (!duplicate) {
+            unique_pts.push_back(p);
+        }
+    }
+
+    if (unique_pts.size() >= 2) {
+        double max_dist = 0.0;
+        Point3 best_a = unique_pts[0], best_b = unique_pts[1];
+        for (size_t i = 0; i < unique_pts.size(); ++i) {
+            for (size_t j = i + 1; j < unique_pts.size(); ++j) {
+                double dist = (unique_pts[i] - unique_pts[j]).length();
+                if (dist > max_dist) {
+                    max_dist = dist;
+                    best_a = unique_pts[i];
+                    best_b = unique_pts[j];
+                }
+            }
+        }
+        if (max_dist > 1e-4) {
+            return Segment3(best_a, best_b);
+        }
+    }
+
+    return Segment3();
 }

@@ -1,5 +1,5 @@
 #define GL_SILENCE_DEPRECATION
-#include "render.hpp"
+#include "..//include/render.hpp"
 #ifdef __APPLE__
 #include <GLUT/glut.h>
 #else
@@ -9,31 +9,29 @@
 #include <cstdlib>
 #include <algorithm>
 
+constexpr unsigned char KEY_RETURN = 13;
+
 Scene global_scene;
 
-// Camera control variables (Spherical coordinates)
 float camera_radius = 15.0f;
-float camera_yaw = 0.8f;   // Angle around Y axis
-float camera_pitch = 0.6f; // Elevation angle
+float camera_yaw = 0.8f;
+float camera_pitch = 0.6f;
 
 /**
  * @brief Draws coordinate axes (X - Red, Y - Green, Z - Blue).
  */
 void draw_axes() {
-    glDisable(GL_LIGHTING); // Axes should be bright and unaffected by light
+    glDisable(GL_LIGHTING);
     glLineWidth(2.0f);
     glBegin(GL_LINES);
-        // X axis (Red)
         glColor3f(1.0f, 0.0f, 0.0f);
         glVertex3f(0.0f, 0.0f, 0.0f);
         glVertex3f(5.0f, 0.0f, 0.0f);
 
-        // Y axis (Green)
         glColor3f(0.0f, 1.0f, 0.0f);
         glVertex3f(0.0f, 0.0f, 0.0f);
         glVertex3f(0.0f, 5.0f, 0.0f);
 
-        // Z axis (Blue)
         glColor3f(0.0f, 0.0f, 1.0f);
         glVertex3f(0.0f, 0.0f, 0.0f);
         glVertex3f(0.0f, 0.0f, 5.0f);
@@ -43,8 +41,8 @@ void draw_axes() {
 }
 
 /**
- * @brief Draws a single 3D triangle using OpenGL primitives[cite: 183].
- * @param t The Triangle3 object to render[cite: 183].
+ * @brief Draws a single 3D triangle using OpenGL primitives[cite: 1].
+ * @param t The Triangle3 object to render[cite: 1].
  */
 void draw_triangle(const Triangle3& t) {
     Vector3 n = t.normal();
@@ -55,8 +53,8 @@ void draw_triangle(const Triangle3& t) {
 }
 
 /**
- * @brief Draws a polygon representing the intersection area[cite: 183].
- * @param p The Polygon3 object to render[cite: 183].
+ * @brief Draws a polygon representing the intersection area[cite: 1].
+ * @param p The Polygon3 object to render[cite: 1].
  */
 void draw_polygon(const Polygon3& p) {
     if (p.dots_amount < 3) return;
@@ -71,13 +69,12 @@ void draw_polygon(const Polygon3& p) {
 }
 
 /**
- * @brief Main display callback function to render the 3D scene[cite: 183].
+ * @brief Main display callback function to render the 3D scene[cite: 1].
  */
 void display() {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glLoadIdentity();
 
-    // Compute camera position from spherical coordinates
     float camX = camera_radius * std::cos(camera_pitch) * std::sin(camera_yaw);
     float camY = camera_radius * std::sin(camera_pitch);
     float camZ = camera_radius * std::cos(camera_pitch) * std::cos(camera_yaw);
@@ -86,10 +83,9 @@ void display() {
               0.0, 0.0, 0.0,
               0.0, 1.0, 0.0);
 
-    // Draw coordinate axes
     draw_axes();
 
-    // Drawing blue triangles
+    // Draw triangles (blue)
     GLfloat blue[] = {0.2f, 0.2f, 1.0f, 1.0f};
     glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, blue);
     glBegin(GL_TRIANGLES);
@@ -98,7 +94,7 @@ void display() {
     }
     glEnd();
 
-    // Drawing red intersection polygons
+    // Draw coplanar intersections (red polygons)
     GLfloat red[] = {1.0f, 0.0f, 0.0f, 1.0f};
     glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, red);
 
@@ -112,21 +108,32 @@ void display() {
     }
     glDisable(GL_POLYGON_OFFSET_FILL);
 
+    // Draw non-coplanar intersection segments (thick yellow lines)
+    glDisable(GL_LIGHTING);
+    glColor3f(1.0f, 1.0f, 0.0f);
+    glLineWidth(4.0f);
+    glBegin(GL_LINES);
+    for (const auto& seg : global_scene.intersection_segments) {
+        glVertex3f(seg.a.x, seg.a.y, seg.a.z);
+        glVertex3f(seg.b.x, seg.b.y, seg.b.z);
+    }
+    glEnd();
+    glLineWidth(1.0f);
+    glEnable(GL_LIGHTING);
+
     glutSwapBuffers();
 }
 
 /**
- * @brief Handles regular keyboard input events (movement, zoom, exit)[cite: 183].
- * @param key ASCII code of the pressed key[cite: 183].
- * @param x Mouse cursor X coordinate[cite: 183].
- * @param y Mouse cursor Y coordinate[cite: 183].
+ * @brief Handles regular keyboard input events (movement, zoom, exit)[cite: 1].
+ * @param key ASCII code of the pressed key[cite: 1].
+ * @param x Mouse cursor X coordinate[cite: 1].
+ * @param y Mouse cursor Y coordinate[cite: 1].
  */
 void keyboard(unsigned char key, int, int) {
-    if (key == '\r') {
+    if (key == KEY_RETURN) {
         exit(0);
-    }
-    // Camera movement via WASD and Zoom via +/-
-    else if (key == 'w' || key == 'W') {
+    } else if (key == 'w' || key == 'W') {
         camera_pitch = std::min(1.5f, camera_pitch + 0.1f);
     } else if (key == 's' || key == 'S') {
         camera_pitch = std::max(-1.5f, camera_pitch - 0.1f);
@@ -139,35 +146,24 @@ void keyboard(unsigned char key, int, int) {
     } else if (key == '-' || key == '_') {
         camera_radius += 1.0f;
     }
-    glutPostRedisplay(); // Request screen refresh
+    glutPostRedisplay();
 }
 
 /**
  * @brief Handles special key input events (Arrow keys for camera rotation).
- * @param key GLUT special key code.
- * @param x Mouse cursor X coordinate.
- * @param y Mouse cursor Y coordinate.
  */
 void specialKeys(int key, int, int) {
     switch (key) {
-        case GLUT_KEY_LEFT:
-            camera_yaw -= 0.1f;
-            break;
-        case GLUT_KEY_RIGHT:
-            camera_yaw += 0.1f;
-            break;
-        case GLUT_KEY_UP:
-            camera_pitch = std::min(1.5f, camera_pitch + 0.1f);
-            break;
-        case GLUT_KEY_DOWN:
-            camera_pitch = std::max(-1.5f, camera_pitch - 0.1f);
-            break;
+        case GLUT_KEY_LEFT: camera_yaw -= 0.1f; break;
+        case GLUT_KEY_RIGHT: camera_yaw += 0.1f; break;
+        case GLUT_KEY_UP: camera_pitch = std::min(1.5f, camera_pitch + 0.1f); break;
+        case GLUT_KEY_DOWN: camera_pitch = std::max(-1.5f, camera_pitch - 0.1f); break;
     }
     glutPostRedisplay();
 }
 
 /**
- * @brief Initializes OpenGL settings, lighting, and depth testing[cite: 183].
+ * @brief Initializes OpenGL settings, lighting, and depth testing[cite: 1].
  */
 void initGL() {
     glEnable(GL_DEPTH_TEST);
@@ -183,9 +179,7 @@ void initGL() {
 }
 
 /**
- * @brief Resizes the viewport and projection matrix when the window changes[cite: 183].
- * @param w New window width[cite: 183].
- * @param h New window height[cite: 183].
+ * @brief Resizes the viewport and projection matrix when the window changes[cite: 1].
  */
 void reshape(int w, int h) {
     if (h == 0) h = 1;
@@ -207,7 +201,7 @@ void start_render(int argc, char** argv, const Scene& scene) {
     glutDisplayFunc(display);
     glutReshapeFunc(reshape);
     glutKeyboardFunc(keyboard);
-    glutSpecialFunc(specialKeys); // Register arrow keys handler
+    glutSpecialFunc(specialKeys);
 
     glutMainLoop();
 }

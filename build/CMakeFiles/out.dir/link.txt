@@ -1,0 +1,1 @@
+/usr/bin/c++  -arch arm64 -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/out.dir/src/main.cpp.o CMakeFiles/out.dir/src/geometry.cpp.o CMakeFiles/out.dir/src/intersection.cpp.o CMakeFiles/out.dir/src/render.cpp.o -o out  -framework OpenGL -framework OpenGL -framework GLUT -framework Cocoa
