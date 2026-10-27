@@ -1,6 +1,7 @@
 #pragma once
-#include "geometry.hpp"
-#include <vector>
+#include "segment.hpp"
+#include "triangle.hpp"
+#include "polygon.hpp"
 
 struct Scene {
     std::vector<Triangle3> triangles;

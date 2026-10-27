@@ -86,24 +86,10 @@ CMakeFiles/out.dir/src/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/out.dir/src/main.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/src/main.cpp -o CMakeFiles/out.dir/src/main.cpp.s
 
-CMakeFiles/out.dir/src/geometry.cpp.o: CMakeFiles/out.dir/flags.make
-CMakeFiles/out.dir/src/geometry.cpp.o: /Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/src/geometry.cpp
-CMakeFiles/out.dir/src/geometry.cpp.o: CMakeFiles/out.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/out.dir/src/geometry.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/out.dir/src/geometry.cpp.o -MF CMakeFiles/out.dir/src/geometry.cpp.o.d -o CMakeFiles/out.dir/src/geometry.cpp.o -c /Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/src/geometry.cpp
-
-CMakeFiles/out.dir/src/geometry.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/out.dir/src/geometry.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/src/geometry.cpp > CMakeFiles/out.dir/src/geometry.cpp.i
-
-CMakeFiles/out.dir/src/geometry.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/out.dir/src/geometry.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/src/geometry.cpp -o CMakeFiles/out.dir/src/geometry.cpp.s
-
 CMakeFiles/out.dir/src/intersection.cpp.o: CMakeFiles/out.dir/flags.make
 CMakeFiles/out.dir/src/intersection.cpp.o: /Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/src/intersection.cpp
 CMakeFiles/out.dir/src/intersection.cpp.o: CMakeFiles/out.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/out.dir/src/intersection.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/out.dir/src/intersection.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/out.dir/src/intersection.cpp.o -MF CMakeFiles/out.dir/src/intersection.cpp.o.d -o CMakeFiles/out.dir/src/intersection.cpp.o -c /Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/src/intersection.cpp
 
 CMakeFiles/out.dir/src/intersection.cpp.i: cmake_force
@@ -117,7 +103,7 @@ CMakeFiles/out.dir/src/intersection.cpp.s: cmake_force
 CMakeFiles/out.dir/src/render.cpp.o: CMakeFiles/out.dir/flags.make
 CMakeFiles/out.dir/src/render.cpp.o: /Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/src/render.cpp
 CMakeFiles/out.dir/src/render.cpp.o: CMakeFiles/out.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/out.dir/src/render.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/out.dir/src/render.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/out.dir/src/render.cpp.o -MF CMakeFiles/out.dir/src/render.cpp.o.d -o CMakeFiles/out.dir/src/render.cpp.o -c /Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/src/render.cpp
 
 CMakeFiles/out.dir/src/render.cpp.i: cmake_force
@@ -131,7 +117,6 @@ CMakeFiles/out.dir/src/render.cpp.s: cmake_force
 # Object files for target out
 out_OBJECTS = \
 "CMakeFiles/out.dir/src/main.cpp.o" \
-"CMakeFiles/out.dir/src/geometry.cpp.o" \
 "CMakeFiles/out.dir/src/intersection.cpp.o" \
 "CMakeFiles/out.dir/src/render.cpp.o"
 
@@ -139,12 +124,11 @@ out_OBJECTS = \
 out_EXTERNAL_OBJECTS =
 
 out: CMakeFiles/out.dir/src/main.cpp.o
-out: CMakeFiles/out.dir/src/geometry.cpp.o
 out: CMakeFiles/out.dir/src/intersection.cpp.o
 out: CMakeFiles/out.dir/src/render.cpp.o
 out: CMakeFiles/out.dir/build.make
 out: CMakeFiles/out.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable out"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable out"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/out.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

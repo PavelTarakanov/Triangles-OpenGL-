@@ -5,4 +5,4 @@
 # This file includes the relevant testing commands required for 
 # testing this directory and lists subdirectories to be tested as well.
 add_test(GeometryUnitTests "/Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/build/triangles_tests")
-set_tests_properties(GeometryUnitTests PROPERTIES  _BACKTRACE_TRIPLES "/Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/CMakeLists.txt;45;add_test;/Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/CMakeLists.txt;0;")
+set_tests_properties(GeometryUnitTests PROPERTIES  _BACKTRACE_TRIPLES "/Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/CMakeLists.txt;43;add_test;/Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/CMakeLists.txt;0;")

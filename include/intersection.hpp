@@ -1,5 +1,7 @@
 #pragma once
-#include "geometry.hpp"
+#include "segment.hpp"
+#include "triangle.hpp"
+#include "polygon.hpp"
 
 bool are_coplanar(const Triangle3& t1, const Triangle3& t2);
 

@@ -1,6 +1,4 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/out.dir/src/geometry.cpp.o"
-  "CMakeFiles/out.dir/src/geometry.cpp.o.d"
   "CMakeFiles/out.dir/src/intersection.cpp.o"
   "CMakeFiles/out.dir/src/intersection.cpp.o.d"
   "CMakeFiles/out.dir/src/main.cpp.o"

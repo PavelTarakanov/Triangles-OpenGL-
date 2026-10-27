@@ -152,33 +152,6 @@ triangles_tests/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/triangles_tests.dir/build.make CMakeFiles/triangles_tests.dir/build
 .PHONY : triangles_tests/fast
 
-src/geometry.o: src/geometry.cpp.o
-.PHONY : src/geometry.o
-
-# target to build an object file
-src/geometry.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/out.dir/build.make CMakeFiles/out.dir/src/geometry.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/triangles_tests.dir/build.make CMakeFiles/triangles_tests.dir/src/geometry.cpp.o
-.PHONY : src/geometry.cpp.o
-
-src/geometry.i: src/geometry.cpp.i
-.PHONY : src/geometry.i
-
-# target to preprocess a source file
-src/geometry.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/out.dir/build.make CMakeFiles/out.dir/src/geometry.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/triangles_tests.dir/build.make CMakeFiles/triangles_tests.dir/src/geometry.cpp.i
-.PHONY : src/geometry.cpp.i
-
-src/geometry.s: src/geometry.cpp.s
-.PHONY : src/geometry.s
-
-# target to generate assembly for a file
-src/geometry.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/out.dir/build.make CMakeFiles/out.dir/src/geometry.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/triangles_tests.dir/build.make CMakeFiles/triangles_tests.dir/src/geometry.cpp.s
-.PHONY : src/geometry.cpp.s
-
 src/intersection.o: src/intersection.cpp.o
 .PHONY : src/intersection.o
 
@@ -286,9 +259,6 @@ help:
 	@echo "... test"
 	@echo "... out"
 	@echo "... triangles_tests"
-	@echo "... src/geometry.o"
-	@echo "... src/geometry.i"
-	@echo "... src/geometry.s"
 	@echo "... src/intersection.o"
 	@echo "... src/intersection.i"
 	@echo "... src/intersection.s"

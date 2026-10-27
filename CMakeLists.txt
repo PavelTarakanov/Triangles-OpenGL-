@@ -22,7 +22,6 @@ include_directories(
 # --- Основное приложение ---
 add_executable(out
     src/main.cpp
-    src/geometry.cpp
     src/intersection.cpp
     src/render.cpp
 )
@@ -35,7 +34,6 @@ find_package(GTest REQUIRED)
 
 add_executable(triangles_tests
     tests/geometry_tests.cpp
-    src/geometry.cpp
 )
 
 # Линковка Google Test

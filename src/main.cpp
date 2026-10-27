@@ -1,6 +1,9 @@
 #include <iostream>
 #include <fstream>
-#include "..//include/geometry.hpp"
+#include "..//include/point.hpp"
+#include "..//include/segment.hpp"
+#include "..//include/triangle.hpp"
+#include "..//include/polygon.hpp"
 #include "..//include/intersection.hpp"
 #include "..//include/render.hpp"
 
@@ -25,9 +28,9 @@ int main(int argc, char** argv) {
 
     for (int i = 0; i < n; ++i) {
         Point3 p1, p2, p3;
-        *input_stream >> p1.x >> p1.y >> p1.z;
-        *input_stream >> p2.x >> p2.y >> p2.z;
-        *input_stream >> p3.x >> p3.y >> p3.z;
+        *input_stream >> p1.x() >> p1.y() >> p1.z();
+        *input_stream >> p2.x() >> p2.y() >> p2.z();
+        *input_stream >> p3.x() >> p3.y() >> p3.z();
         scene.triangles.push_back(Triangle3(p1, p2, p3));
     }
 
@@ -36,7 +39,7 @@ int main(int argc, char** argv) {
         for (size_t j = i + 1; j < scene.triangles.size(); ++j) {
             if (are_coplanar(scene.triangles[i], scene.triangles[j])) {
                 Polygon3 poly = intersect_coplanar_triangles(scene.triangles[i], scene.triangles[j]);
-                if (poly.dots_amount > 2) {
+                if (poly.dots_amount() > 2) {
                     scene.intersections.push_back(poly);
                 }
             } else {

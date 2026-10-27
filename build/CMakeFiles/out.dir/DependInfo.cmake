@@ -8,7 +8,6 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/src/geometry.cpp" "CMakeFiles/out.dir/src/geometry.cpp.o" "gcc" "CMakeFiles/out.dir/src/geometry.cpp.o.d"
   "/Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/src/intersection.cpp" "CMakeFiles/out.dir/src/intersection.cpp.o" "gcc" "CMakeFiles/out.dir/src/intersection.cpp.o.d"
   "/Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/src/main.cpp" "CMakeFiles/out.dir/src/main.cpp.o" "gcc" "CMakeFiles/out.dir/src/main.cpp.o.d"
   "/Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/src/render.cpp" "CMakeFiles/out.dir/src/render.cpp.o" "gcc" "CMakeFiles/out.dir/src/render.cpp.o.d"

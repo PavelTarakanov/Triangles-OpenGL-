@@ -1,6 +1,4 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/triangles_tests.dir/src/geometry.cpp.o"
-  "CMakeFiles/triangles_tests.dir/src/geometry.cpp.o.d"
   "CMakeFiles/triangles_tests.dir/tests/geometry_tests.cpp.o"
   "CMakeFiles/triangles_tests.dir/tests/geometry_tests.cpp.o.d"
   "triangles_tests"

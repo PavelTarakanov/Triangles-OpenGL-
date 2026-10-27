@@ -852,4 +852,6 @@ CMakeFiles/triangles_tests.dir/tests/geometry_tests.cpp.o: \
   /opt/homebrew/include/gtest/gtest-typed-test.h \
   /opt/homebrew/include/gtest/gtest_pred_impl.h \
   /opt/homebrew/include/gtest/gtest_prod.h \
-  /Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/include/geometry.hpp
+  /Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/tests/..//include/vector.hpp \
+  /Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/tests/..//include/point.hpp \
+  /Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/tests/..//include/triangle.hpp

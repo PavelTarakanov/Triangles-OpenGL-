@@ -1,6 +1,10 @@
 #include <cmath>
-#include <vector>
 #include <algorithm>
+#include "..//include/vector.hpp"
+#include "..//include/point.hpp"
+#include "..//include/segment.hpp"
+#include "..//include/triangle.hpp"
+#include "..//include/polygon.hpp"
 #include "..//include/intersection.hpp"
 
 constexpr double EPS = 1e-6;
@@ -9,7 +13,7 @@ bool are_coplanar(const Triangle3& t1, const Triangle3& t2) {
     Vector3 n1 = t1.normal();
     Vector3 n2 = t2.normal();
     if (n1.cross(n2).length() > EPS) return false;
-    double dist = std::abs(n1.dot(t2.a - t1.a));
+    double dist = std::abs(n1.dot(t2.a() - t1.a()));
     return dist < EPS;
 }
 
@@ -33,25 +37,25 @@ Polygon3 intersect_coplanar_triangles(const Triangle3& t1, const Triangle3& t2) 
 
     Vector3 n = t1.normal();
     int drop_axis = 0;
-    if (std::abs(n.y) > std::abs(n.x)) drop_axis = 1;
-    if (std::abs(n.z) > std::abs(n.x) && std::abs(n.z) > std::abs(n.y)) drop_axis = 2;
+    if (std::abs(n.y()) > std::abs(n.x())) drop_axis = 1;
+    if (std::abs(n.z()) > std::abs(n.x()) && std::abs(n.z()) > std::abs(n.y())) drop_axis = 2;
 
     auto to2d = [&](const Point3& p) -> Point2D {
-        if (drop_axis == 0) return {p.y, p.z};
-        if (drop_axis == 1) return {p.x, p.z};
-        return {p.x, p.y};
+        if (drop_axis == 0) return {p.y(), p.z()};
+        if (drop_axis == 1) return {p.x(), p.z()};
+        return {p.x(), p.y()};
     };
 
     auto to3d = [&](const Point2D& p2, const Point3& ref) -> Point3 {
-        double A = n.x, B = n.y, C = n.z;
-        double D = -(A * ref.x + B * ref.y + C * ref.z);
+        double A = n.x(), B = n.y(), C = n.z();
+        double D = -(A * ref.x() + B * ref.y() + C * ref.z());
         if (drop_axis == 0) return {-(B * p2.x + C * p2.y + D) / A, p2.x, p2.y};
         if (drop_axis == 1) return {p2.x, -(A * p2.x + C * p2.y + D) / B, p2.y};
         return {p2.x, p2.y, -(A * p2.x + B * p2.y + D) / C};
     };
 
-    std::vector<Point2D> poly1 = {to2d(t1.a), to2d(t1.b), to2d(t1.c)};
-    std::vector<Point2D> poly2 = {to2d(t2.a), to2d(t2.b), to2d(t2.c)};
+    std::vector<Point2D> poly1 = {to2d(t1.a()), to2d(t1.b()), to2d(t1.c())};
+    std::vector<Point2D> poly2 = {to2d(t2.a()), to2d(t2.b()), to2d(t2.c())};
 
     if (cross2d(poly2[0], poly2[1], poly2[2]) < 0) {
         std::reverse(poly2.begin(), poly2.end());
@@ -82,14 +86,14 @@ Polygon3 intersect_coplanar_triangles(const Triangle3& t1, const Triangle3& t2) 
     }
 
     std::vector<Point3> res3d;
-    for (auto& p2 : clipped) res3d.push_back(to3d(p2, t1.a));
+    for (auto& p2 : clipped) res3d.push_back(to3d(p2, t1.a()));
     return Polygon3(res3d);
 }
 
 bool point_in_triangle(const Point3& p, const Triangle3& t) {
-    Vector3 v0 = t.b - t.a;
-    Vector3 v1 = t.c - t.a;
-    Vector3 v2 = p - t.a;
+    Vector3 v0 = t.b() - t.a();
+    Vector3 v1 = t.c() - t.a();
+    Vector3 v2 = p - t.a();
     double d00 = v0.dot(v0);
     double d01 = v0.dot(v1);
     double d11 = v1.dot(v1);
@@ -106,10 +110,9 @@ bool point_in_triangle(const Point3& p, const Triangle3& t) {
 
 bool intersect_segment_plane(const Point3& a, const Point3& b, const Triangle3& t, Point3& out_pt) {
     Vector3 n = t.normal();
-    // Превращаем Point3 в Vector3 через вычитание с началом координат или через векторные компоненты
-    Vector3 ta_vec(t.a.x, t.a.y, t.a.z);
-    Vector3 a_vec(a.x, a.y, a.z);
-    Vector3 b_vec(b.x, b.y, b.z);
+    Vector3 ta_vec(t.a().x(), t.a().y(), t.a().z());
+    Vector3 a_vec(a.x(), a.y(), a.z());
+    Vector3 b_vec(b.x(), b.y(), b.z());
 
     double d = -n.dot(ta_vec);
     double na = n.dot(a_vec) + d;
@@ -118,7 +121,7 @@ bool intersect_segment_plane(const Point3& a, const Point3& b, const Triangle3& 
     if (std::abs(na - nb) < 1e-9) return false;
     double t_val = na / (na - nb);
     if (t_val < 0.0 || t_val > 1.0) return false;
-    out_pt = Point3(a.x + t_val * (b.x - a.x), a.y + t_val * (b.y - a.y), a.z + t_val * (b.z - a.z));
+    out_pt = Point3(a.x() + t_val * (b.x() - a.x()), a.y() + t_val * (b.y() - a.y()), a.z() + t_val * (b.z() - a.z()));
     return true;
 }
 
@@ -127,7 +130,7 @@ Segment3 intersect_non_coplanar_triangles(const Triangle3& t1, const Triangle3& 
 
     std::vector<Point3> pts;
 
-    Point3 edges1[3][2] = {{t1.a, t1.b}, {t1.b, t1.c}, {t1.c, t1.a}};
+    Point3 edges1[3][2] = {{t1.a(), t1.b()}, {t1.b(), t1.c()}, {t1.c(), t1.a()}};
     for (int i = 0; i < 3; ++i) {
         Point3 pt;
         if (intersect_segment_plane(edges1[i][0], edges1[i][1], t2, pt)) {
@@ -137,7 +140,7 @@ Segment3 intersect_non_coplanar_triangles(const Triangle3& t1, const Triangle3& 
         }
     }
 
-    Point3 edges2[3][2] = {{t2.a, t2.b}, {t2.b, t2.c}, {t2.c, t2.a}};
+    Point3 edges2[3][2] = {{t2.a(), t2.b()}, {t2.b(), t2.c()}, {t2.c(), t2.a()}};
     for (int i = 0; i < 3; ++i) {
         Point3 pt;
         if (intersect_segment_plane(edges2[i][0], edges2[i][1], t1, pt)) {

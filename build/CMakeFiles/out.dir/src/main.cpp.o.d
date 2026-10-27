@@ -811,6 +811,10 @@ CMakeFiles/out.dir/src/main.cpp.o: \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__filesystem/path_iterator.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__filesystem/recursive_directory_iterator.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__filesystem/u8path.h \
-  /Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/src/..//include/geometry.hpp \
+  /Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/src/..//include/point.hpp \
+  /Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/src/..//include/vector.hpp \
+  /Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/src/..//include/segment.hpp \
+  /Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/src/..//include/triangle.hpp \
+  /Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/src/..//include/polygon.hpp \
   /Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/src/..//include/intersection.hpp \
   /Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/src/..//include/render.hpp

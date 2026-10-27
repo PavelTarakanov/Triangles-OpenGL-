@@ -39,21 +39,22 @@ void draw_axes() {
 
 void draw_triangle(const Triangle3& t) {
     Vector3 n = t.normal();
-    glNormal3f(n.x, n.y, n.z);
-    glVertex3f(t.a.x, t.a.y, t.a.z);
-    glVertex3f(t.b.x, t.b.y, t.b.z);
-    glVertex3f(t.c.x, t.c.y, t.c.z);
+    glNormal3f(n.x(), n.y(), n.z());
+    glVertex3f(t.a().x(), t.a().y(), t.a().z());
+    glVertex3f(t.b().x(), t.b().y(), t.b().z());
+    glVertex3f(t.c().x(), t.c().y(), t.c().z());
 }
 
 void draw_polygon(const Polygon3& p) {
-    if (p.dots_amount < 3) return;
-    Vector3 v1 = p.dot_list[1] - p.dot_list[0];
-    Vector3 v2 = p.dot_list[2] - p.dot_list[0];
+    if (p.dots_amount() < 3) return;
+    // Используем геттер dot_list() с круглыми скобками
+    Vector3 v1 = p.dot_list()[1] - p.dot_list()[0];
+    Vector3 v2 = p.dot_list()[2] - p.dot_list()[0];
     Vector3 n = v1.cross(v2).normalized();
 
-    glNormal3f(n.x, n.y, n.z);
-    for (unsigned int i = 0; i < p.dots_amount; ++i) {
-        glVertex3f(p.dot_list[i].x, p.dot_list[i].y, p.dot_list[i].z);
+    glNormal3f(n.x(), n.y(), n.z());
+    for (unsigned int i = 0; i < p.dots_amount(); ++i) {
+        glVertex3f(p.dot_list()[i].x(), p.dot_list()[i].y(), p.dot_list()[i].z());
     }
 }
 
@@ -100,8 +101,8 @@ void display() {
     glLineWidth(4.0f);
     glBegin(GL_LINES);
     for (const auto& seg : global_scene.intersection_segments) {
-        glVertex3f(seg.a.x, seg.a.y, seg.a.z);
-        glVertex3f(seg.b.x, seg.b.y, seg.b.z);
+        glVertex3f(seg.a().x(), seg.a().y(), seg.a().z());
+        glVertex3f(seg.b().x(), seg.b().y(), seg.b().z());
     }
     glEnd();
     glLineWidth(1.0f);
