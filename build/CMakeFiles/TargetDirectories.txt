@@ -1,5 +1,0 @@
-/Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/build/CMakeFiles/out.dir
-/Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/build/CMakeFiles/triangles_tests.dir
-/Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/build/CMakeFiles/test.dir
-/Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/build/CMakeFiles/edit_cache.dir
-/Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/build/CMakeFiles/rebuild_cache.dir
