@@ -4,12 +4,6 @@
 #include "..//include/intersection.hpp"
 #include "..//include/render.hpp"
 
-/**
- * @brief Main entry point of the program[cite: 2].
- * @param argc Argument count[cite: 2].
- * @param argv Argument values (optional input file path)[cite: 2].
- * @return Exit status code[cite: 2].
- */
 int main(int argc, char** argv) {
     std::istream* input_stream = &std::cin;
     std::ifstream file_stream;

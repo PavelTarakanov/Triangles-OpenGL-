@@ -17,9 +17,6 @@ float camera_radius = 15.0f;
 float camera_yaw = 0.8f;
 float camera_pitch = 0.6f;
 
-/**
- * @brief Draws coordinate axes (X - Red, Y - Green, Z - Blue).
- */
 void draw_axes() {
     glDisable(GL_LIGHTING);
     glLineWidth(2.0f);
@@ -40,10 +37,6 @@ void draw_axes() {
     glEnable(GL_LIGHTING);
 }
 
-/**
- * @brief Draws a single 3D triangle using OpenGL primitives[cite: 1].
- * @param t The Triangle3 object to render[cite: 1].
- */
 void draw_triangle(const Triangle3& t) {
     Vector3 n = t.normal();
     glNormal3f(n.x, n.y, n.z);
@@ -52,10 +45,6 @@ void draw_triangle(const Triangle3& t) {
     glVertex3f(t.c.x, t.c.y, t.c.z);
 }
 
-/**
- * @brief Draws a polygon representing the intersection area[cite: 1].
- * @param p The Polygon3 object to render[cite: 1].
- */
 void draw_polygon(const Polygon3& p) {
     if (p.dots_amount < 3) return;
     Vector3 v1 = p.dot_list[1] - p.dot_list[0];
@@ -68,9 +57,6 @@ void draw_polygon(const Polygon3& p) {
     }
 }
 
-/**
- * @brief Main display callback function to render the 3D scene[cite: 1].
- */
 void display() {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glLoadIdentity();
@@ -124,12 +110,6 @@ void display() {
     glutSwapBuffers();
 }
 
-/**
- * @brief Handles regular keyboard input events (movement, zoom, exit)[cite: 1].
- * @param key ASCII code of the pressed key[cite: 1].
- * @param x Mouse cursor X coordinate[cite: 1].
- * @param y Mouse cursor Y coordinate[cite: 1].
- */
 void keyboard(unsigned char key, int, int) {
     if (key == KEY_RETURN) {
         exit(0);
@@ -149,9 +129,6 @@ void keyboard(unsigned char key, int, int) {
     glutPostRedisplay();
 }
 
-/**
- * @brief Handles special key input events (Arrow keys for camera rotation).
- */
 void specialKeys(int key, int, int) {
     switch (key) {
         case GLUT_KEY_LEFT: camera_yaw -= 0.1f; break;
@@ -162,9 +139,6 @@ void specialKeys(int key, int, int) {
     glutPostRedisplay();
 }
 
-/**
- * @brief Initializes OpenGL settings, lighting, and depth testing[cite: 1].
- */
 void initGL() {
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_LIGHTING);
@@ -178,9 +152,6 @@ void initGL() {
     glClearColor(0.9f, 0.9f, 0.9f, 1.0f);
 }
 
-/**
- * @brief Resizes the viewport and projection matrix when the window changes[cite: 1].
- */
 void reshape(int w, int h) {
     if (h == 0) h = 1;
     glViewport(0, 0, w, h);

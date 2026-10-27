@@ -15,25 +15,10 @@ bool are_coplanar(const Triangle3& t1, const Triangle3& t2) {
 
 struct Point2D { double x, y; };
 
-/**
- * @brief Computes the 2D cross product (oriented area) of three points.
- * @param a First point.
- * @param b Second point.
- * @param c Third point.
- * @return Double value representing the oriented side.
- */
 double cross2d(Point2D a, Point2D b, Point2D c) {
     return (b.x - a.x) * (c.y - a.y) - (b.y - a.y) * (c.x - a.x);
 }
 
-/**
- * @brief Finds the intersection point of two 2D lines using Cramer's rule.
- * @param a Start point of the first line.
- * @param b End point of the first line.
- * @param p Start point of the second line.
- * @param q End point of the second line.
- * @return Intersection Point2D.
- */
 Point2D intersect_lines2d(Point2D a, Point2D b, Point2D p, Point2D q) {
     double A1 = b.y - a.y, B1 = a.x - b.x, C1 = A1 * a.x + B1 * a.y;
     double A2 = q.y - p.y, B2 = p.x - q.x, C2 = A2 * p.x + B2 * p.y;
@@ -101,9 +86,6 @@ Polygon3 intersect_coplanar_triangles(const Triangle3& t1, const Triangle3& t2) 
     return Polygon3(res3d);
 }
 
-/**
- * @brief Checks if a 3D point is inside a triangle.
- */
 bool point_in_triangle(const Point3& p, const Triangle3& t) {
     Vector3 v0 = t.b - t.a;
     Vector3 v1 = t.c - t.a;
@@ -122,9 +104,6 @@ bool point_in_triangle(const Point3& p, const Triangle3& t) {
     return (u >= eps) && (v >= eps) && (w >= eps) && (u <= 1.0 - eps) && (v <= 1.0 - eps) && (w <= 1.0 - eps);
 }
 
-/**
- * @brief Intersects a 3D segment with a triangle's plane.
- */
 bool intersect_segment_plane(const Point3& a, const Point3& b, const Triangle3& t, Point3& out_pt) {
     Vector3 n = t.normal();
     // Превращаем Point3 в Vector3 через вычитание с началом координат или через векторные компоненты

@@ -1,0 +1,14 @@
+build/
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+CTestTestfile.cmake
+
+out
+triangles_tests
+*.o
+*.d
+
+.DS_Store
+.vscode/
+.idea/
