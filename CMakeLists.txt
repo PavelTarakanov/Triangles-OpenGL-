@@ -33,7 +33,11 @@ target_link_libraries(out PRIVATE ${OPENGL_LIBRARIES} ${GLUT_LIBRARIES})
 find_package(GTest REQUIRED)
 
 add_executable(triangles_tests
-    tests/geometry_tests.cpp
+    tests/vector_tests.cpp
+    tests/point_tests.cpp
+    tests/segment_tests.cpp
+    tests/triangle_tests.cpp
+    tests/polygon_tests.cpp
 )
 
 # Линковка Google Test

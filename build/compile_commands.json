@@ -1,0 +1,50 @@
+[
+{
+  "directory": "/Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/build",
+  "command": "/usr/bin/clang++  -I/Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/include -I/Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/src -I/Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/. -F/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks -g -std=gnu++17 -arch arm64 -o CMakeFiles/out.dir/src/main.cpp.o -c /Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/src/main.cpp",
+  "file": "/Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/src/main.cpp",
+  "output": "CMakeFiles/out.dir/src/main.cpp.o"
+},
+{
+  "directory": "/Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/build",
+  "command": "/usr/bin/clang++  -I/Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/include -I/Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/src -I/Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/. -F/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks -g -std=gnu++17 -arch arm64 -o CMakeFiles/out.dir/src/intersection.cpp.o -c /Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/src/intersection.cpp",
+  "file": "/Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/src/intersection.cpp",
+  "output": "CMakeFiles/out.dir/src/intersection.cpp.o"
+},
+{
+  "directory": "/Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/build",
+  "command": "/usr/bin/clang++  -I/Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/include -I/Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/src -I/Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/. -F/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks -g -std=gnu++17 -arch arm64 -o CMakeFiles/out.dir/src/render.cpp.o -c /Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/src/render.cpp",
+  "file": "/Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/src/render.cpp",
+  "output": "CMakeFiles/out.dir/src/render.cpp.o"
+},
+{
+  "directory": "/Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/build",
+  "command": "/usr/bin/clang++  -I/Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/include -I/Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/src -I/Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/. -isystem /opt/homebrew/include -g -std=gnu++17 -arch arm64 -o CMakeFiles/triangles_tests.dir/tests/vector_tests.cpp.o -c /Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/tests/vector_tests.cpp",
+  "file": "/Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/tests/vector_tests.cpp",
+  "output": "CMakeFiles/triangles_tests.dir/tests/vector_tests.cpp.o"
+},
+{
+  "directory": "/Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/build",
+  "command": "/usr/bin/clang++  -I/Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/include -I/Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/src -I/Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/. -isystem /opt/homebrew/include -g -std=gnu++17 -arch arm64 -o CMakeFiles/triangles_tests.dir/tests/point_tests.cpp.o -c /Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/tests/point_tests.cpp",
+  "file": "/Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/tests/point_tests.cpp",
+  "output": "CMakeFiles/triangles_tests.dir/tests/point_tests.cpp.o"
+},
+{
+  "directory": "/Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/build",
+  "command": "/usr/bin/clang++  -I/Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/include -I/Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/src -I/Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/. -isystem /opt/homebrew/include -g -std=gnu++17 -arch arm64 -o CMakeFiles/triangles_tests.dir/tests/segment_tests.cpp.o -c /Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/tests/segment_tests.cpp",
+  "file": "/Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/tests/segment_tests.cpp",
+  "output": "CMakeFiles/triangles_tests.dir/tests/segment_tests.cpp.o"
+},
+{
+  "directory": "/Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/build",
+  "command": "/usr/bin/clang++  -I/Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/include -I/Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/src -I/Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/. -isystem /opt/homebrew/include -g -std=gnu++17 -arch arm64 -o CMakeFiles/triangles_tests.dir/tests/triangle_tests.cpp.o -c /Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/tests/triangle_tests.cpp",
+  "file": "/Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/tests/triangle_tests.cpp",
+  "output": "CMakeFiles/triangles_tests.dir/tests/triangle_tests.cpp.o"
+},
+{
+  "directory": "/Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/build",
+  "command": "/usr/bin/clang++  -I/Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/include -I/Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/src -I/Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/. -isystem /opt/homebrew/include -g -std=gnu++17 -arch arm64 -o CMakeFiles/triangles_tests.dir/tests/polygon_tests.cpp.o -c /Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/tests/polygon_tests.cpp",
+  "file": "/Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/tests/polygon_tests.cpp",
+  "output": "CMakeFiles/triangles_tests.dir/tests/polygon_tests.cpp.o"
+}
+]

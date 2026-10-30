@@ -34,9 +34,16 @@ int main(int argc, char** argv) {
         scene.triangles.push_back(Triangle3(p1, p2, p3));
     }
 
-    // Find intersections between all pairs of triangles
+    // Find intersections between all pairs of triangles with AABB optimization
     for (size_t i = 0; i < scene.triangles.size(); ++i) {
         for (size_t j = i + 1; j < scene.triangles.size(); ++j) {
+
+            // 1. Broad Phase: Быстрая проверка ограничивающих коробок
+            if (!scene.triangles[i].intersects_aabb(scene.triangles[j])) {
+                continue; // Если коробки не пересекаются, пропускаем пару мгновенно!
+            }
+
+            // 2. Narrow Phase: Тяжелые точные алгоритмы пересечений
             if (are_coplanar(scene.triangles[i], scene.triangles[j])) {
                 Polygon3 poly = intersect_coplanar_triangles(scene.triangles[i], scene.triangles[j]);
                 if (poly.dots_amount() > 2) {

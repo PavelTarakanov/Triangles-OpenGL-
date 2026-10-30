@@ -36,6 +36,12 @@ public:
     const Point3& Max_dot() const { return max_dot_; }
     const Point3& Min_dot() const { return min_dot_; }
 
+    bool intersects_aabb(const Triangle3& other) const {
+        return (Min_dot().x() <= other.Max_dot().x() && Max_dot().x() >= other.Min_dot().x()) &&
+               (Min_dot().y() <= other.Max_dot().y() && Max_dot().y() >= other.Min_dot().y()) &&
+               (Min_dot().z() <= other.Max_dot().z() && Max_dot().z() >= other.Min_dot().z());
+    }
+
     Vector3 edge_AB() const {
         return b_ - a_;
     }
