@@ -1,10 +1,10 @@
-Start testing: Oct 30 10:15 MSK
+Start testing: Nov 16 11:49 MSK
 ----------------------------------------------------------
-1/1 Testing: GeometryUnitTests
-1/1 Test: GeometryUnitTests
+1/2 Testing: GeometryUnitTests
+1/2 Test: GeometryUnitTests
 Command: "/Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/build/triangles_tests"
 Directory: /Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/build
-"GeometryUnitTests" start time: Oct 30 10:15 MSK
+"GeometryUnitTests" start time: Nov 16 11:49 MSK
 Output:
 ----------------------------------------------------------
 Running main() from /private/tmp/googletest-20260810-2279-a5yc4x/googletest-1.18.0/googletest/src/gtest_main.cc
@@ -75,11 +75,47 @@ Running main() from /private/tmp/googletest-20260810-2279-a5yc4x/googletest-1.18
 [==========] 23 tests from 5 test suites ran. (0 ms total)
 [  PASSED  ] 23 tests.
 <end of output>
-Test time =   0.29 sec
+Test time =   0.03 sec
 ----------------------------------------------------------
 Test Passed.
-"GeometryUnitTests" end time: Oct 30 10:15 MSK
+"GeometryUnitTests" end time: Nov 16 11:49 MSK
 "GeometryUnitTests" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-End testing: Oct 30 10:15 MSK
+2/2 Testing: EndToEndTests
+2/2 Test: EndToEndTests
+Command: "/Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/build/e2e_tests"
+Directory: /Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/build
+"EndToEndTests" start time: Nov 16 11:49 MSK
+Output:
+----------------------------------------------------------
+Running main() from /private/tmp/googletest-20260810-2279-a5yc4x/googletest-1.18.0/googletest/src/gtest_main.cc
+[==========] Running 6 tests from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 6 tests from E2EBlackBoxTest
+[ RUN      ] E2EBlackBoxTest.NonCoplanarTrianglesIntersection
+[       OK ] E2EBlackBoxTest.NonCoplanarTrianglesIntersection (212 ms)
+[ RUN      ] E2EBlackBoxTest.CoplanarOverlappingTriangles
+[       OK ] E2EBlackBoxTest.CoplanarOverlappingTriangles (13 ms)
+[ RUN      ] E2EBlackBoxTest.DisjointTrianglesCulledByAABB
+[       OK ] E2EBlackBoxTest.DisjointTrianglesCulledByAABB (9 ms)
+[ RUN      ] E2EBlackBoxTest.StdinInputPipeline
+[       OK ] E2EBlackBoxTest.StdinInputPipeline (7 ms)
+[ RUN      ] E2EBlackBoxTest.MissingInputFileReturnsError
+[       OK ] E2EBlackBoxTest.MissingInputFileReturnsError (6 ms)
+[ RUN      ] E2EBlackBoxTest.CorruptedVertexDataReturnsError
+[       OK ] E2EBlackBoxTest.CorruptedVertexDataReturnsError (6 ms)
+[----------] 6 tests from E2EBlackBoxTest (256 ms total)
+
+[----------] Global test environment tear-down
+[==========] 6 tests from 1 test suite ran. (256 ms total)
+[  PASSED  ] 6 tests.
+<end of output>
+Test time =   0.72 sec
+----------------------------------------------------------
+Test Passed.
+"EndToEndTests" end time: Nov 16 11:49 MSK
+"EndToEndTests" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Nov 16 11:49 MSK

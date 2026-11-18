@@ -46,5 +46,11 @@
   "command": "/usr/bin/clang++  -I/Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/include -I/Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/src -I/Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/. -isystem /opt/homebrew/include -g -std=gnu++17 -arch arm64 -o CMakeFiles/triangles_tests.dir/tests/polygon_tests.cpp.o -c /Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/tests/polygon_tests.cpp",
   "file": "/Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/tests/polygon_tests.cpp",
   "output": "CMakeFiles/triangles_tests.dir/tests/polygon_tests.cpp.o"
+},
+{
+  "directory": "/Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/build",
+  "command": "/usr/bin/clang++  -I/Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/include -I/Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/src -I/Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/. -isystem /opt/homebrew/include -g -std=gnu++17 -arch arm64 -o CMakeFiles/e2e_tests.dir/tests/e2e_tests.cpp.o -c /Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/tests/e2e_tests.cpp",
+  "file": "/Users/pavel/Desktop/Допы_Владимирова/Triangles-OpenGL-/tests/e2e_tests.cpp",
+  "output": "CMakeFiles/e2e_tests.dir/tests/e2e_tests.cpp.o"
 }
 ]

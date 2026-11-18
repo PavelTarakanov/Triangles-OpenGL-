@@ -1,49 +1,59 @@
 #include <iostream>
 #include <fstream>
-#include "..//include/point.hpp"
-#include "..//include/segment.hpp"
-#include "..//include/triangle.hpp"
-#include "..//include/polygon.hpp"
-#include "..//include/intersection.hpp"
-#include "..//include/render.hpp"
+#include <string>
+#include "../include/point.hpp"
+#include "../include/segment.hpp"
+#include "../include/triangle.hpp"
+#include "../include/polygon.hpp"
+#include "../include/intersection.hpp"
+#include "../include/render.hpp"
 
 int main(int argc, char** argv) {
     std::istream* input_stream = &std::cin;
     std::ifstream file_stream;
+    bool headless = false;
 
-    if (argc > 1) {
-        file_stream.open(argv[1]);
-        if (file_stream.is_open()) {
-            input_stream = &file_stream;
+    for (int i = 1; i < argc; ++i) {
+        std::string arg = argv[i];
+        if (arg == "--headless") {
+            headless = true;
         } else {
-            std::cerr << "Error: Could not open file " << argv[1] << std::endl;
-            return 1;
+            file_stream.open(arg);
+            if (file_stream.is_open()) {
+                input_stream = &file_stream;
+            } else {
+                std::cerr << "Error: Could not open file " << arg << std::endl;
+                return 1;
+            }
         }
     }
 
     int n;
-    if (!(*input_stream >> n)) return 0;
+    if (!(*input_stream >> n) || n < 0) {
+        std::cerr << "Error: Invalid triangle count" << std::endl;
+        return 1;
+    }
 
     Scene scene;
 
     for (int i = 0; i < n; ++i) {
         Point3 p1, p2, p3;
-        *input_stream >> p1.x() >> p1.y() >> p1.z();
-        *input_stream >> p2.x() >> p2.y() >> p2.z();
-        *input_stream >> p3.x() >> p3.y() >> p3.z();
+        if (!(*input_stream >> p1.x() >> p1.y() >> p1.z()
+                            >> p2.x() >> p2.y() >> p2.z()
+                            >> p3.x() >> p3.y() >> p3.z())) {
+            std::cerr << "Error: Incomplete vertex data" << std::endl;
+            return 1;
+        }
         scene.triangles.push_back(Triangle3(p1, p2, p3));
     }
 
-    // Find intersections between all pairs of triangles with AABB optimization
+    // Broad-phase AABB + Narrow-phase intersection detection
     for (size_t i = 0; i < scene.triangles.size(); ++i) {
         for (size_t j = i + 1; j < scene.triangles.size(); ++j) {
-
-            // 1. Broad Phase: Быстрая проверка ограничивающих коробок
             if (!scene.triangles[i].intersects_aabb(scene.triangles[j])) {
-                continue; // Если коробки не пересекаются, пропускаем пару мгновенно!
+                continue;
             }
 
-            // 2. Narrow Phase: Тяжелые точные алгоритмы пересечений
             if (are_coplanar(scene.triangles[i], scene.triangles[j])) {
                 Polygon3 poly = intersect_coplanar_triangles(scene.triangles[i], scene.triangles[j]);
                 if (poly.dots_amount() > 2) {
@@ -56,6 +66,18 @@ int main(int argc, char** argv) {
                 }
             }
         }
+    }
+
+    if (headless) {
+        std::cout << "TRIANGLES: " << scene.triangles.size() << "\n";
+        std::cout << "COPLANAR_POLYGONS: " << scene.intersections.size() << "\n";
+        std::cout << "NON_COPLANAR_SEGMENTS: " << scene.intersection_segments.size() << "\n";
+        for (const auto& seg : scene.intersection_segments) {
+            std::cout << "SEGMENT: ("
+                      << seg.a().x() << ", " << seg.a().y() << ", " << seg.a().z() << ") -> ("
+                      << seg.b().x() << ", " << seg.b().y() << ", " << seg.b().z() << ")\n";
+        }
+        return 0;
     }
 
     start_render(argc, argv, scene);

@@ -1,35 +1,35 @@
 cmake_minimum_required(VERSION 3.14)
 project(TrianglesIntersection CXX)
 
-# Используем стандарт C++17
+# Use C++17 standard
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# Включаем поддержку тестирования
+# Enable testing support
 enable_testing()
 
-# Поиск необходимых графических библиотек (OpenGL и GLUT)
+# Find required graphics libraries (OpenGL and GLUT)
 find_package(OpenGL REQUIRED)
 find_package(GLUT REQUIRED)
 
-# Указываем пути к заголовочным файлам
+# Specify header search directories
 include_directories(
     include
     src
     .
 )
 
-# --- Основное приложение ---
+# --- Main Application ---
 add_executable(out
     src/main.cpp
     src/intersection.cpp
     src/render.cpp
 )
 
-# Линковка OpenGL и GLUT (работает кроссплатформенно на macOS и Linux)
+# Link OpenGL and GLUT
 target_link_libraries(out PRIVATE ${OPENGL_LIBRARIES} ${GLUT_LIBRARIES})
 
-# --- Юнит-тесты (Google Test) ---
+# --- Unit Tests (Google Test) ---
 find_package(GTest REQUIRED)
 
 add_executable(triangles_tests
@@ -40,8 +40,19 @@ add_executable(triangles_tests
     tests/polygon_tests.cpp
 )
 
-# Линковка Google Test
 target_link_libraries(triangles_tests PRIVATE GTest::gtest GTest::gtest_main)
-
-# Регистрация теста для CTest
 add_test(NAME GeometryUnitTests COMMAND triangles_tests)
+
+# --- End-to-End Tests ---
+add_executable(e2e_tests
+    tests/e2e_tests.cpp
+)
+
+target_link_libraries(e2e_tests PRIVATE GTest::gtest GTest::gtest_main)
+add_dependencies(e2e_tests out)
+
+add_test(
+    NAME EndToEndTests
+    COMMAND e2e_tests
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+)

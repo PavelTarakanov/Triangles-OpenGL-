@@ -152,6 +152,19 @@ triangles_tests/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/triangles_tests.dir/build.make CMakeFiles/triangles_tests.dir/build
 .PHONY : triangles_tests/fast
 
+#=============================================================================
+# Target rules for targets named e2e_tests
+
+# Build rule for target.
+e2e_tests: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 e2e_tests
+.PHONY : e2e_tests
+
+# fast build rule for target.
+e2e_tests/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/e2e_tests.dir/build.make CMakeFiles/e2e_tests.dir/build
+.PHONY : e2e_tests/fast
+
 src/intersection.o: src/intersection.cpp.o
 .PHONY : src/intersection.o
 
@@ -223,6 +236,30 @@ src/render.s: src/render.cpp.s
 src/render.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/out.dir/build.make CMakeFiles/out.dir/src/render.cpp.s
 .PHONY : src/render.cpp.s
+
+tests/e2e_tests.o: tests/e2e_tests.cpp.o
+.PHONY : tests/e2e_tests.o
+
+# target to build an object file
+tests/e2e_tests.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/e2e_tests.dir/build.make CMakeFiles/e2e_tests.dir/tests/e2e_tests.cpp.o
+.PHONY : tests/e2e_tests.cpp.o
+
+tests/e2e_tests.i: tests/e2e_tests.cpp.i
+.PHONY : tests/e2e_tests.i
+
+# target to preprocess a source file
+tests/e2e_tests.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/e2e_tests.dir/build.make CMakeFiles/e2e_tests.dir/tests/e2e_tests.cpp.i
+.PHONY : tests/e2e_tests.cpp.i
+
+tests/e2e_tests.s: tests/e2e_tests.cpp.s
+.PHONY : tests/e2e_tests.s
+
+# target to generate assembly for a file
+tests/e2e_tests.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/e2e_tests.dir/build.make CMakeFiles/e2e_tests.dir/tests/e2e_tests.cpp.s
+.PHONY : tests/e2e_tests.cpp.s
 
 tests/point_tests.o: tests/point_tests.cpp.o
 .PHONY : tests/point_tests.o
@@ -353,6 +390,7 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... test"
+	@echo "... e2e_tests"
 	@echo "... out"
 	@echo "... triangles_tests"
 	@echo "... src/intersection.o"
@@ -364,6 +402,9 @@ help:
 	@echo "... src/render.o"
 	@echo "... src/render.i"
 	@echo "... src/render.s"
+	@echo "... tests/e2e_tests.o"
+	@echo "... tests/e2e_tests.i"
+	@echo "... tests/e2e_tests.s"
 	@echo "... tests/point_tests.o"
 	@echo "... tests/point_tests.i"
 	@echo "... tests/point_tests.s"
