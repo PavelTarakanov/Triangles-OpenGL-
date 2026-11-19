@@ -1,3 +1,0 @@
-GeometryUnitTests 5 0.00522188
-EndToEndTests 1 0.719912
----
